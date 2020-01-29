@@ -1,0 +1,58 @@
+<table{{#any _hasRowHeaders _isMobileTwoColumns}} class="{{#if _hasRowHeaders}}csvtojson__hasrowheaders {{/if}}{{#if _isMobileTwoColumns}}csvtojson__ismobiletwocolumns{{/if}}"{{/any}}>
+  <thead>
+    <tr>
+{{#each columns}}
+      <th scope="col">{{.}}</th>
+{{/each}}    
+    </tr>
+  </thead>
+  <tbody>
+{{#each rows}}
+  {{#unless @first}}
+    {{#unless @root/_isMobileTwoColumns}}
+    <tr class="csvtojson_rowcolheaders">
+    {{#each @root/columns}}
+      <th scope="col">
+        {{.}}
+      </th>
+    {{/each}}
+    </tr>
+    {{/unless}}
+    <tr class="csvtojson_rowdata">
+    {{#each .}}
+      {{#if @root/_hasRowHeaders}}
+        {{#if @first}}
+      <th scope="row">
+        {{#if @root/_isMobileTwoColumns}}
+        {{#if (lookup @root/columns @index)}}
+        <span class="csvtojson_rowcolheader">{{lookup @root/columns @index}}</span>
+        {{/if}}
+        {{/if}}
+        {{.}}
+      </th>
+        {{else}}
+      <td>
+        {{#if @root/_isMobileTwoColumns}}
+        {{#if (lookup @root/columns @index)}}
+        <span class="csvtojson_rowcolheader">{{lookup @root/columns @index}}</span>
+        {{/if}}
+        {{/if}}
+        {{.}}
+      </td>
+        {{/if}}
+      {{else}}
+      <td>
+        {{#if @root/_isMobileTwoColumns}}
+        {{#if (lookup @root/columns @index)}}
+        <span class="csvtojson_rowcolheader">{{lookup @root/columns @index}}</span>
+        {{/if}}
+        {{/if}}
+        {{.}}
+      </td>
+      {{/if}}
+    {{/each}}
+    </tr>
+  {{/unless}}
+{{/each}}
+  </tbody>
+</table> 
