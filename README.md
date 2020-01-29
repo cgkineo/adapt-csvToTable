@@ -11,7 +11,7 @@ Add columns headers as a separate row in between data rows
 
 > _hasRowHeaders=true
 
-Format first column data as row headers
+Format first column cells as row headers
 
 #### Column headers only
 ```hbs
