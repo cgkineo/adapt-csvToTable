@@ -7,7 +7,7 @@ Add columns headers to row cells
 
 > _isMobileTwoColumns=false
 
-Add columns as separate row in between data rows
+Add columns headers as a separate row in between data rows
 
 > _hasRowHeaders=true
 
