@@ -17,6 +17,11 @@ Format first column data as row headers
 ```hbs
 {{#csvToTable}}head1,head2,head3\nval1,val2,val3\n"value with "" speechmarks",val5,val6{{/csvToTable}}
 ```
+```json
+{
+  "body": "{{#csvToTable}}head1,head2,head3\nval1,val2,val3\n\"value with \"\" speechmarks\",val5,val6{{/csvToTable}}"
+}
+```
 ```html
 <table>
   <thead>
@@ -78,6 +83,11 @@ Format first column data as row headers
 #### Column and row headers
 ```hbs
 {{#csvToTable _hasRowHeaders=true _isMobileTwoColumns=true}},chead2,chead3\nrhead1,val1,val2\nrhead2,val3,val4{{/csvToTable}}
+```
+```json
+{
+  "body": "{{#csvToTable _hasRowHeaders=true _isMobileTwoColumns=true}},chead2,chead3\nrhead1,val1,val2\nrhead2,val3,val4{{/csvToTable}}"
+}
 ```
 ```html
 <table class="csvtojson__hasrowheaders csvtojson__ismobiletwocolumns ">
