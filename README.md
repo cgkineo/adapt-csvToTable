@@ -20,7 +20,7 @@ Format first column cells as row headers
 " "" " = double speechmark is for escaping speechmarks rather than ending a cell  
 
 #### CSV in JSON
-JSON cannot contain newline characters \r or \n or speechmnarks without escaping them as \r or \n or \".
+JSON cannot contain newline characters \r or \n or speechmnarks without escaping them as \r or \n or \\".
 
 #### Column headers only
 ```hbs
