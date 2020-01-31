@@ -13,6 +13,15 @@ Add columns headers as a separate row in between data rows
 
 Format first column cells as row headers
 
+#### CSV Format
+\n or \r\n = new row
+, = new column
+"" = cell containing \r \n , or "
+" "" " = double speechmark is for escaping speechmarks rather than ending a cell
+
+#### CSV in JSON
+JSON cannot contain newline characters \r or \n or speechmnarks without escaping them as \r or \n or \".
+
 #### Column headers only
 ```hbs
 {{#csvToTable}}head1,head2,head3\nval1,val2,val3\n"value with "" speechmarks",val5,val6{{/csvToTable}}
