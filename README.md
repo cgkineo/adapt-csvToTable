@@ -29,8 +29,7 @@ val1,val2,val3
 "value with "" speechmarks",val5,val6
 ```
 ```hbs
-{{#csvToTable}}
-head1,head2,head3
+{{#csvToTable}}head1,head2,head3
 val1,val2,val3
 "value with "" speechmarks",val5,val6{{/csvToTable}}
 ```
