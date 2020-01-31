@@ -29,7 +29,10 @@ val1,val2,val3
 "value with "" speechmarks",val5,val6
 ```
 ```hbs
-{{#csvToTable}}head1,head2,head3\nval1,val2,val3\n"value with "" speechmarks",val5,val6{{/csvToTable}}
+{{#csvToTable}}
+head1,head2,head3
+val1,val2,val3
+"value with "" speechmarks",val5,val6{{/csvToTable}}
 ```
 ```json
 {
@@ -101,7 +104,9 @@ rhead1,val1,val2
 rhead2,val3,val4
 ```
 ```hbs
-{{#csvToTable _hasRowHeaders=true _isMobileTwoColumns=true}},chead2,chead3\nrhead1,val1,val2\nrhead2,val3,val4{{/csvToTable}}
+{{#csvToTable _hasRowHeaders=true _isMobileTwoColumns=true}},chead2,chead3
+rhead1,val1,val2
+rhead2,val3,val4{{/csvToTable}}
 ```
 ```json
 {
