@@ -14,10 +14,10 @@ Add columns headers as a separate row in between data rows
 Format first column cells as row headers
 
 #### CSV Format
-\n or \r\n = new row
-, = new column
-"" = cell containing \r \n , or "
-" "" " = double speechmark is for escaping speechmarks rather than ending a cell
+\n or \r\n = new row  
+, = new column  
+"" = cell containing \r \n , or "  
+" "" " = double speechmark is for escaping speechmarks rather than ending a cell  
 
 #### CSV in JSON
 JSON cannot contain newline characters \r or \n or speechmnarks without escaping them as \r or \n or \".
