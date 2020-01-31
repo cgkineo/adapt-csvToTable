@@ -1,17 +1,11 @@
 # adapt-csvToTable
 
 ### Flags
-> _isMobileTwoColumns=true
-
-Add columns headers to row cells
-
-> _isMobileTwoColumns=false
-
-Add columns headers as a separate row in between data rows
-
-> _hasRowHeaders=true
-
-Format first column cells as row headers
+`_isMobileTwoColumns=true` Add columns headers to row cells  
+  
+`_isMobileTwoColumns=false` Add columns headers as a separate row in between data rows  
+  
+`_hasRowHeaders=true` Format first column cells as row headers  
 
 #### CSV Format
 \n or \r\n = new row  
