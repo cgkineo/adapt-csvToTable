@@ -16,13 +16,18 @@ Format first column cells as row headers
 #### CSV Format
 \n or \r\n = new row  
 , = new column  
-"" = cell containing \r \n , or "  
+"" = cell containing \r \n , or \\"  
 " "" " = double speechmark is for escaping speechmarks rather than ending a cell  
 
 #### CSV in JSON
 JSON cannot contain newline characters \r or \n or speechmnarks without escaping them as \r or \n or \\".
 
 #### Column headers only
+```csv
+head1,head2,head3
+val1,val2,val3
+"value with "" speechmarks",val5,val6
+```
 ```hbs
 {{#csvToTable}}head1,head2,head3\nval1,val2,val3\n"value with "" speechmarks",val5,val6{{/csvToTable}}
 ```
@@ -90,6 +95,11 @@ JSON cannot contain newline characters \r or \n or speechmnarks without escaping
 ```
 
 #### Column and row headers
+```csv
+,chead2,chead3
+rhead1,val1,val2
+rhead2,val3,val4
+```
 ```hbs
 {{#csvToTable _hasRowHeaders=true _isMobileTwoColumns=true}},chead2,chead3\nrhead1,val1,val2\nrhead2,val3,val4{{/csvToTable}}
 ```
