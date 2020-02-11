@@ -1,17 +1,15 @@
 # adapt-csvToTable
 
 ### Flags
-`_isMobileTwoColumns=true` Add columns headers to row cells
-
-`_isMobileTwoColumns=false` Add columns headers as a separate row in between data rows
-
-`_hasRowHeaders=true` Format first column cells as row headers
+* `_isMobileTwoColumns=true` Add columns headers to row cells
+* `_isMobileTwoColumns=false` Add columns headers as a separate row in between data rows
+* `_hasRowHeaders=true` Format first column cells as row headers
 
 #### CSV Format
-\n or \r\n = new row
-, = new column
-"" = cell containing \r \n , or \\"
-" "" " = double speechmark is for escaping speechmarks rather than ending a cell
+* \n or \r\n = new row
+* , = new column
+* "" = cell containing \r \n , or \\"
+* " "" " = double speechmark is for escaping speechmarks rather than ending a cell
 
 #### CSV in JSON
 JSON cannot contain newline characters \r or \n or speechmnarks without escaping them as \r or \n or \\".
@@ -185,7 +183,7 @@ Medium,T3,T3,T4
 Low,T3,T4,T4
 ```
 ###### Styling csv
-Used as `[colspan:rowspan]classname`:
+Define as `[colspan:rowspan]classname`
 ```csv
 [5:1]align-right
 [2:2],[3:1]align-right
