@@ -1,0 +1,99 @@
+.csvtojson {
+  // &__table {
+    // width: 100%;
+  // }
+
+  &__head-row {
+    @media (max-width: @device-width-medium) {
+      .u-display-none;
+    }
+  }
+
+  &__body-row.is-header {
+    @media (min-width: @device-width-medium) {
+      .u-display-none;
+    }
+  }
+}
+
+
+
+
+// create a loop mixin
+.grid-loop(@columns, @total: @columns) when (@columns > 0) {
+  // loop output
+  @media (min-width: @device-width-medium) {
+    .csvtojson__table[data-col-count="@{columns}"] th,
+    .csvtojson__table[data-col-count="@{columns}"] td {
+    // width: percentage(@columns / @total)
+      width: 100% / @columns;
+    }
+  }
+
+  // recursive call
+  .grid-loop(@columns - 1, @total);
+}
+
+// apply the mixin, for 10 columns
+.grid-loop(10);
+
+
+
+// styles
+// [class^='grid-'] {
+//   border: 1px solid;
+//   box-sizing: border-box;
+//   float: left;
+//   padding: 1em 0;
+//   text-align: center;
+// }
+
+// --------------------------------------------------
+// --------------------------------------------------
+// THEME
+// --------------------------------------------------
+// --------------------------------------------------
+.csvtojson {
+  &__table {
+    position: relative;
+  }
+
+
+  &__body-row:nth-child(4n-6) {
+    background-color: darken(@white, 5%);
+  }
+
+  &__body-row:nth-child(4n-4) {
+    background-color: darken(@white, 10%);
+  }
+
+
+
+  &__head-cell,
+  &__body-cell {
+    @media (max-width: @device-width-medium) {
+      display: block;
+    }
+  }
+
+
+
+
+  &__head-cell.is-th,
+  &__body-cell.is-th {
+    background-color: @item-color-hover;
+    color: @item-color-inverted-hover;
+  }
+
+  &__body-row.is-body &__body-cell.is-th {
+    background-color: @item-color;
+    color: @item-color-inverted;
+  }
+
+  &__head-cell.is-th,
+  &__body-cell.is-th,
+  &__body-cell.is-td {
+    padding: @item-padding / 2;
+    text-align: left;
+  }
+}

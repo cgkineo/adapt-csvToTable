@@ -1,88 +1,98 @@
 # adapt-csvToTable
 
 ### Flags
-`_isMobileTwoColumns=true` Add columns headers to row cells  
-  
-`_isMobileTwoColumns=false` Add columns headers as a separate row in between data rows  
-  
-`_hasRowHeaders=true` Format first column cells as row headers  
+`_isMobileTwoColumns=true` Add columns headers to row cells
+
+`_isMobileTwoColumns=false` Add columns headers as a separate row in between data rows
+
+`_hasRowHeaders=true` Format first column cells as row headers
 
 #### CSV Format
-\n or \r\n = new row  
-, = new column  
-"" = cell containing \r \n , or \\"  
-" "" " = double speechmark is for escaping speechmarks rather than ending a cell  
+\n or \r\n = new row
+, = new column
+"" = cell containing \r \n , or \\"
+" "" " = double speechmark is for escaping speechmarks rather than ending a cell
 
 #### CSV in JSON
 JSON cannot contain newline characters \r or \n or speechmnarks without escaping them as \r or \n or \\".
 
 #### Column headers only
+###### Data csv
 ```csv
 head1,head2,head3
 val1,val2,val3
 "value with "" speechmarks",val5,val6
 ```
+###### Handlebars
 ```hbs
 {{#csvToTable}}head1,head2,head3
 val1,val2,val3
 "value with "" speechmarks",val5,val6{{/csvToTable}}
 ```
+###### Handlebars as JSON
 ```json
 {
   "body": "{{#csvToTable}}head1,head2,head3\nval1,val2,val3\n\"value with \"\" speechmarks\",val5,val6{{/csvToTable}}"
 }
 ```
+###### HTML output
 ```html
-<table>
+<table class="csvtojson__table " data-col-count="3">
   <thead>
-    <tr>
-      <th scope="col">head1</th>
-      <th scope="col">head2</th>
-      <th scope="col">head3</th>
+    <tr class="csvtojson__head-row">
+      <th class="csvtojson__head-cell is-th " scope="col" rowspan="1" colspan="1">
+        head1
+      </th>
+      <th class="csvtojson__head-cell is-th " scope="col" rowspan="" colspan="">
+        head2
+      </th>
+      <th class="csvtojson__head-cell is-th " scope="col" rowspan="" colspan="">
+        head3
+      </th>
     </tr>
   </thead>
   <tbody>
-    <tr class="csvtojson_rowcolheaders">
-      <th scope="col">
-        head1
+    <tr class="csvtojson__body-row is-header  csvtojson__row-col-headers">
+      <th class="csvtojson__body-cell is-th " scope="col" colspan="" rowspan="">
+        val1
       </th>
-      <th scope="col">
-        head2
+      <th class="csvtojson__body-cell is-th " scope="col" colspan="" rowspan="">
+        val2
       </th>
-      <th scope="col">
-        head3
+      <th class="csvtojson__body-cell is-th " scope="col" colspan="" rowspan="">
+        val3
       </th>
     </tr>
-    <tr class="csvtojson_rowdata">
-      <td>
+    <tr class="csvtojson__body-row is-body  body-row">
+      <td class="csvtojson__body-cell is-td " colspan="" rowspan="">
         val1
       </td>
-      <td>
+      <td class="csvtojson__body-cell is-td " colspan="" rowspan="">
         val2
       </td>
-      <td>
+      <td class="csvtojson__body-cell is-td " colspan="" rowspan="">
         val3
       </td>
     </tr>
-    <tr class="csvtojson_rowcolheaders">
-      <th scope="col">
-        head1
+    <tr class="csvtojson__body-row is-header  csvtojson__row-col-headers">
+      <th class="csvtojson__body-cell is-th " scope="col" colspan="" rowspan="">
+        value with " speechmarks
       </th>
-      <th scope="col">
-        head2
+      <th class="csvtojson__body-cell is-th " scope="col" colspan="" rowspan="">
+        val5
       </th>
-      <th scope="col">
-        head3
+      <th class="csvtojson__body-cell is-th " scope="col" colspan="" rowspan="">
+        val6
       </th>
     </tr>
-    <tr class="csvtojson_rowdata">
-      <td>
+    <tr class="csvtojson__body-row is-body  body-row">
+      <td class="csvtojson__body-cell is-td " colspan="" rowspan="">
         value with " speechmarks
       </td>
-      <td>
+      <td class="csvtojson__body-cell is-td " colspan="" rowspan="">
         val5
       </td>
-      <td>
+      <td class="csvtojson__body-cell is-td " colspan="" rowspan="">
         val6
       </td>
     </tr>
@@ -91,55 +101,252 @@ val1,val2,val3
 ```
 
 #### Column and row headers
+###### Data csv
 ```csv
 ,chead2,chead3
 rhead1,val1,val2
 rhead2,val3,val4
 ```
+###### Handlebars
 ```hbs
 {{#csvToTable _hasRowHeaders=true _isMobileTwoColumns=true}},chead2,chead3
 rhead1,val1,val2
 rhead2,val3,val4{{/csvToTable}}
 ```
+###### Handlebars as JSON
 ```json
 {
   "body": "{{#csvToTable _hasRowHeaders=true _isMobileTwoColumns=true}},chead2,chead3\nrhead1,val1,val2\nrhead2,val3,val4{{/csvToTable}}"
 }
 ```
+###### HTML output
 ```html
-<table class="csvtojson__hasrowheaders csvtojson__ismobiletwocolumns ">
+<table class="csvtojson__table  has-row-headers csvtojson__hasrowheaders is-mobile-two-columns csvtojson__ismobiletwocolumns" data-col-count="3">
   <thead>
-    <tr>
-      <th scope="col"></th>
-      <th scope="col">chead2</th>
-      <th scope="col">chead3</th>
+    <tr class="csvtojson__head-row">
+      <th class="csvtojson__head-cell is-th " scope="col" rowspan="1" colspan="1">
+
+      </th>
+      <th class="csvtojson__head-cell is-th " scope="col" rowspan="" colspan="">
+        chead2
+      </th>
+      <th class="csvtojson__head-cell is-th " scope="col" rowspan="" colspan="">
+        chead3
+      </th>
     </tr>
   </thead>
   <tbody>
-    <tr class="csvtojson_rowdata">
-      <th scope="row">
+    <tr class="csvtojson__body-row is-body  body-row">
+      <th class="csvtojson__body-cell is-th " scope="row" colspan="" rowspan="">
         rhead1
       </th>
-      <td>
-        <span class="csvtojson_rowcolheader">chead2</span>
+      <td class="csvtojson__body-cell is-td " colspan="" rowspan="">
+        <span class="csvtojson__row-col-header">
+          chead2
+        </span>
         val1
       </td>
-      <td>
-        <span class="csvtojson_rowcolheader">chead3</span>
+      <td class="csvtojson__body-cell is-td " colspan="" rowspan="">
+        <span class="csvtojson__row-col-header">
+          chead3
+        </span>
         val2
       </td>
     </tr>
-    <tr class="csvtojson_rowdata">
-      <th scope="row">
+    <tr class="csvtojson__body-row is-body  body-row">
+      <th class="csvtojson__body-cell is-th " scope="row" colspan="" rowspan="">
         rhead2
       </th>
-      <td>
-        <span class="csvtojson_rowcolheader">chead2</span>
+      <td class="csvtojson__body-cell is-td " colspan="" rowspan="">
+        <span class="csvtojson__row-col-header">
+          chead2
+        </span>
         val3
       </td>
-      <td>
-        <span class="csvtojson_rowcolheader">chead3</span>
+      <td class="csvtojson__body-cell is-td " colspan="" rowspan="">
+        <span class="csvtojson__row-col-header">
+          chead3
+        </span>
         val4
+      </td>
+    </tr>
+  </tbody>
+</table>
+```
+
+#### Adding cell spans and classes
+###### Data csv
+```csv
+Reliance = Non-High
+,Materiality
+High,Medium,Low
+Complexity,High,T2,T3,T3
+Medium,T3,T3,T4
+Low,T3,T4,T4
+```
+###### Styling csv
+Used as `[colspan:rowspan]classname`:
+```csv
+[5:1]align-right
+[2:2],[3:1]align-right
+
+[1:3]
+```
+###### Handlbars
+```hbs
+{{#csvToTable _hasRowHeaders='' _isMobileTwoColumns=''}}Reliance = Non-High
+,Materiality
+High,Medium,Low
+Complexity,High,T2,T3,T3
+Medium,T3,T3,T4
+Low,T3,T4,T4{{else}}[5:1]align-right
+[2:2],[3:1]align-right
+
+[1:3]{{/csvToTable}}
+```
+###### Handlebars as JSON
+```json
+{
+  "body": "{{#csvToTable _hasRowHeaders='' _isMobileTwoColumns=''}}Reliance = Non-High\n,Materiality\nHigh,Medium,Low\nComplexity,High,T2,T3,T3\nMedium,T3,T3,T4\nLow,T3,T4,T4{{else}}[5:1]align-right\n[2:2],[3:1]align-right\n\n[1:3]{{/csvToTable}}",
+}
+```
+###### HTML output
+```html
+<table class="csvtojson__table " data-col-count="5">
+  <thead>
+    <tr class="csvtojson__head-row">
+      <th class="csvtojson__head-cell is-th align-right" scope="col" rowspan="1" colspan="5">
+        Reliance = Non-High
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="csvtojson__body-row is-header  csvtojson__row-col-headers">
+      <th class="csvtojson__body-cell is-th " scope="col" colspan="2" rowspan="2">
+
+      </th>
+      <th class="csvtojson__body-cell is-th align-right" scope="col" colspan="3" rowspan="1">
+        Materiality
+      </th>
+    </tr>
+    <tr class="csvtojson__body-row is-body  body-row">
+      <td class="csvtojson__body-cell is-td " colspan="2" rowspan="2">
+
+      </td>
+      <td class="csvtojson__body-cell is-td align-right" colspan="3" rowspan="1">
+        Materiality
+      </td>
+    </tr>
+    <tr class="csvtojson__body-row is-header  csvtojson__row-col-headers">
+      <th class="csvtojson__body-cell is-th " scope="col" colspan="1" rowspan="1">
+        High
+      </th>
+      <th class="csvtojson__body-cell is-th " scope="col" colspan="" rowspan="">
+        Medium
+      </th>
+      <th class="csvtojson__body-cell is-th " scope="col" colspan="" rowspan="">
+        Low
+      </th>
+    </tr>
+    <tr class="csvtojson__body-row is-body  body-row">
+      <td class="csvtojson__body-cell is-td " colspan="1" rowspan="1">
+        High
+      </td>
+      <td class="csvtojson__body-cell is-td " colspan="" rowspan="">
+        Medium
+      </td>
+      <td class="csvtojson__body-cell is-td " colspan="" rowspan="">
+        Low
+      </td>
+    </tr>
+    <tr class="csvtojson__body-row is-header  csvtojson__row-col-headers">
+      <th class="csvtojson__body-cell is-th " scope="col" colspan="1" rowspan="3">
+        Complexity
+      </th>
+      <th class="csvtojson__body-cell is-th " scope="col" colspan="" rowspan="">
+        High
+      </th>
+      <th class="csvtojson__body-cell is-th " scope="col" colspan="" rowspan="">
+        T2
+      </th>
+      <th class="csvtojson__body-cell is-th " scope="col" colspan="" rowspan="">
+        T3
+      </th>
+      <th class="csvtojson__body-cell is-th " scope="col" colspan="" rowspan="">
+        T3
+      </th>
+    </tr>
+    <tr class="csvtojson__body-row is-body  body-row">
+      <td class="csvtojson__body-cell is-td " colspan="1" rowspan="3">
+        Complexity
+      </td>
+      <td class="csvtojson__body-cell is-td " colspan="" rowspan="">
+        High
+      </td>
+      <td class="csvtojson__body-cell is-td " colspan="" rowspan="">
+        T2
+      </td>
+      <td class="csvtojson__body-cell is-td " colspan="" rowspan="">
+        T3
+      </td>
+      <td class="csvtojson__body-cell is-td " colspan="" rowspan="">
+        T3
+      </td>
+    </tr>
+    <tr class="csvtojson__body-row is-header  csvtojson__row-col-headers">
+      <th class="csvtojson__body-cell is-th " scope="col" colspan="" rowspan="">
+        Medium
+      </th>
+      <th class="csvtojson__body-cell is-th " scope="col" colspan="" rowspan="">
+        T3
+      </th>
+      <th class="csvtojson__body-cell is-th " scope="col" colspan="" rowspan="">
+        T3
+      </th>
+      <th class="csvtojson__body-cell is-th " scope="col" colspan="" rowspan="">
+        T4
+      </th>
+    </tr>
+    <tr class="csvtojson__body-row is-body  body-row">
+      <td class="csvtojson__body-cell is-td " colspan="" rowspan="">
+        Medium
+      </td>
+      <td class="csvtojson__body-cell is-td " colspan="" rowspan="">
+        T3
+      </td>
+      <td class="csvtojson__body-cell is-td " colspan="" rowspan="">
+        T3
+      </td>
+      <td class="csvtojson__body-cell is-td " colspan="" rowspan="">
+        T4
+      </td>
+    </tr>
+    <tr class="csvtojson__body-row is-header  csvtojson__row-col-headers">
+      <th class="csvtojson__body-cell is-th " scope="col" colspan="" rowspan="">
+        Low
+      </th>
+      <th class="csvtojson__body-cell is-th " scope="col" colspan="" rowspan="">
+        T3
+      </th>
+      <th class="csvtojson__body-cell is-th " scope="col" colspan="" rowspan="">
+        T4
+      </th>
+      <th class="csvtojson__body-cell is-th " scope="col" colspan="" rowspan="">
+        T4
+      </th>
+    </tr>
+    <tr class="csvtojson__body-row is-body  body-row">
+      <td class="csvtojson__body-cell is-td " colspan="" rowspan="">
+        Low
+      </td>
+      <td class="csvtojson__body-cell is-td " colspan="" rowspan="">
+        T3
+      </td>
+      <td class="csvtojson__body-cell is-td " colspan="" rowspan="">
+        T4
+      </td>
+      <td class="csvtojson__body-cell is-td " colspan="" rowspan="">
+        T4
       </td>
     </tr>
   </tbody>
