@@ -1,13 +1,15 @@
-<table class="csvtojson__table {{#if _hasRowHeaders}} has-row-headers csvtojson__hasrowheaders{{/if}}{{#if _isMobileTwoColumns}} is-mobile-two-columns csvtojson__ismobiletwocolumns{{/if}}" data-col-count="{{colCount}}">
+<table class="csvtotable__table{{#if _retainDesktopViewOnMobile}} retain-desktop-view{{else}} is-stacked{{/if}}{{#equals _mobileColumns 1}} is-one-column{{/equals}}{{#equals _mobileColumns 2}} is-two-columns{{/equals}}{{#if _hasRowHeaders}} has-row-headers{{/if}}" data-col-count="{{colCount}}">
 
-  {{#if _caption}}
-  <caption class="aria-label">test table here</caption>
+  {{#if caption}}
+  <caption class="aria-label">
+    {{{caption}}}
+  </caption>
   {{/if}}
 
   <thead>
-    <tr class="csvtojson__head-row">
+    <tr class="csvtotable__head-row">
       {{#each columns as |cell colIndex|}}
-      <th class="csvtojson__head-cell is-th {{lookup2d @root/styles 0 colIndex}}" scope="col" rowspan="{{lookup2d @root/rowspans 0 colIndex}}" colspan="{{lookup2d @root/colspans 0 colIndex}}">
+      <th class="csvtotable__head-cell is-th {{lookup2d @root/styles 0 colIndex}}" scope="col" colspan="{{lookup2d @root/colspans 0 colIndex}}" rowspan="{{lookup2d @root/rowspans 0 colIndex}}">
         {{cell}}
       </th>
       {{/each}}
@@ -17,53 +19,53 @@
   <tbody>
     {{#each rows as |columns rowIndex|}}
     {{#unless @first}}
-    {{#unless @root/_isMobileTwoColumns}}
-    <tr class="csvtojson__body-row is-header  csvtojson__row-col-headers">
-      {{#each columns as |cell colIndex|}}
-      <th class="csvtojson__body-cell is-th {{lookup2d @root/styles rowIndex colIndex}}" scope="col" colspan="{{lookup2d @root/colspans rowIndex colIndex}}" rowspan="{{lookup2d @root/rowspans rowIndex colIndex}}">
+    {{#unless @root/_retainDesktopViewOnMobile}}
+    <tr class="csvtotable__body-row is-header">
+      {{#each @root/columns as |cell colIndex|}}
+      <th class="csvtotable__body-cell is-th {{lookup2d @root/styles rowIndex colIndex}}" scope="col" colspan="{{lookup2d @root/colspans rowIndex colIndex}}" rowspan="{{lookup2d @root/rowspans rowIndex colIndex}}">
         {{cell}}
       </th>
       {{/each}}
     </tr>
     {{/unless}}
 
-    <tr class="csvtojson__body-row is-body  body-row">
+    <tr class="csvtotable__body-row is-body">
       {{#each columns as |cell colIndex|}}
       {{#if @root/_hasRowHeaders}}
-      {{#if @first}}
-      <th class="csvtojson__body-cell is-th {{lookup2d @root/styles rowIndex colIndex}}" scope="row" colspan="{{lookup2d @root/colspans rowIndex colIndex}}" rowspan="{{lookup2d @root/rowspans rowIndex colIndex}}">
-        {{#if @root/_isMobileTwoColumns}}
-        {{#if (lookup @root/columns colIndex)}}
-        <span class="csvtojson__row-col-header test123">
-          {{lookup @root/columns colIndex}}
-        </span>
+        {{#if @first}}
+        <th class="csvtotable__body-cell is-th {{lookup2d @root/styles rowIndex colIndex}}" scope="row" colspan="{{lookup2d @root/colspans rowIndex colIndex}}" rowspan="{{lookup2d @root/rowspans rowIndex colIndex}}">
+          {{#unless @root/_retainDesktopViewOnMobile}}
+          {{#if (lookup @root/columns colIndex)}}
+          <span class="csvtotable__body-cell-span">
+            {{lookup @root/columns colIndex}}
+          </span>
+          {{/if}}
+          {{/unless}}
+          {{cell}}
+        </th>
+        {{else}}
+        <td class="csvtotable__body-cell is-td {{lookup2d @root/styles rowIndex colIndex}}" colspan="{{lookup2d @root/colspans rowIndex colIndex}}" rowspan="{{lookup2d @root/rowspans rowIndex colIndex}}">
+          {{#unless @root/_retainDesktopViewOnMobile}}
+          {{#if (lookup @root/columns colIndex)}}
+          <span class="csvtotable__body-cell-span">
+            {{lookup @root/columns colIndex}}
+          </span>
+          {{/if}}
+          {{/unless}}
+          {{cell}}
+        </td>
         {{/if}}
-        {{/if}}
-        {{cell}}
-      </th>
-      {{else}}
-      <td class="csvtojson__body-cell is-td {{lookup2d @root/styles rowIndex colIndex}}" colspan="{{lookup2d @root/colspans rowIndex colIndex}}" rowspan="{{lookup2d @root/rowspans rowIndex colIndex}}">
-        {{#if @root/_isMobileTwoColumns}}
-        {{#if (lookup @root/columns colIndex)}}
-        <span class="csvtojson__row-col-header">
-          {{lookup @root/columns colIndex}}
-        </span>
-        {{/if}}
-        {{/if}}
-        {{cell}}
-      </td>
-      {{/if}}
-      {{else}}
-      <td class="csvtojson__body-cell is-td {{lookup2d @root/styles rowIndex colIndex}}" colspan="{{lookup2d @root/colspans rowIndex colIndex}}" rowspan="{{lookup2d @root/rowspans rowIndex colIndex}}">
-        {{#if @root/_isMobileTwoColumns}}
-        {{#if (lookup @root/columns colIndex)}}
-        <span class="csvtojson__row-col-header">
-          {{lookup @root/columns colIndex}}
-        </span>
-        {{/if}}
-        {{/if}}
-        {{cell}}
-      </td>
+        {{else}}
+        <td class="csvtotable__body-cell is-td {{lookup2d @root/styles rowIndex colIndex}}" colspan="{{lookup2d @root/colspans rowIndex colIndex}}" rowspan="{{lookup2d @root/rowspans rowIndex colIndex}}">
+          {{#unless @root/_retainDesktopViewOnMobile}}
+          {{#if (lookup @root/columns colIndex)}}
+          <span class="csvtotable__body-cell-span">
+            {{lookup @root/columns colIndex}}
+          </span>
+          {{/if}}
+          {{/unless}}
+          {{cell}}
+        </td>
       {{/if}}
       {{/each}}
     </tr>

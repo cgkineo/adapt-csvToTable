@@ -1,31 +1,127 @@
-.csvtojson {
-  // &__table {
-    // width: 100%;
-  // }
+.csvtotable {
+  &__table {
+    width: 100%;
+  }
 
-  &__head-row {
+  // --------------------------------------------------
+  // Stacked table common styles
+  // --------------------------------------------------
+  // All cells are set to block model below medium breakpoint
+  &__table.is-stacked &__head-cell,
+  &__table.is-stacked &__body-cell {
+    @media (max-width: @device-width-medium) {
+      display: block;
+    }
+  }
+
+  // Hide thead header row when below medium breakpoint
+  &__table.is-stacked &__head-row {
     @media (max-width: @device-width-medium) {
       .u-display-none;
     }
   }
 
-  &__body-row.is-header {
+  // Hide tbody header row when above medium breakpoint
+  &__table.is-stacked &__body-row.is-header {
     @media (min-width: @device-width-medium) {
       .u-display-none;
     }
   }
+
+  // Add margin between stacked data sets
+  // &__table.is-stacked &__body-row:not(.is-header) &__body-cell:last-child {
+  //   margin-bottom: @item-margin;
+  // }
+  // --------------------------------------------------
+
+  // --------------------------------------------------
+  // Stacked table one column styles
+  // --------------------------------------------------
+  // Always hide span header text
+  &__table.is-one-column &__body-cell-span {
+    .u-display-none;
+  }
+  // --------------------------------------------------
+
+  // --------------------------------------------------
+  // Stacked table two column styles
+  // --------------------------------------------------
+  // Always hide tbody header row
+  &__table.is-two-columns &__body-row.is-header {
+    .u-display-none;
+  }
+
+  // Styling for two column table cells below medium breakpoint
+  &__table.is-two-columns &__body-cell {
+    @media (max-width: @device-width-medium) {
+      position: relative;
+      min-width: 100%;
+      width: 100%;
+      max-width: 100%;
+      display: block;
+      padding-left: 12.5rem;
+      text-align: left;
+    }
+  }
+
+  // Hide span header text above medium breakpoint
+  &__table.is-two-columns &__body-cell-span {
+    @media (min-width: @device-width-medium) {
+      .u-display-none;
+    }
+  }
+
+  // Styling for span header text below medium breakpoint
+  &__table.is-two-columns &__body-cell-span {
+    @media (max-width: @device-width-medium) {
+      position: absolute;
+      top: @item-padding / 2;
+      left: @item-padding / 2;
+      display: block;
+      width: 11rem;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
+  // --------------------------------------------------
+
+  // --------------------------------------------------
+  // Table cell alignment above medium breakpoint
+  // use 'align-table-left' at component level to change all cell alignment
+  // use 'align-left' in csv json to change individual cell alignment
+  // --------------------------------------------------
+  @media (min-width: @device-width-medium) {
+    .component.align-table-left &__table,
+    &__table .align-left {
+      text-align: left;
+    }
+
+    .component.align-table-center &__table,
+    &__table .align-center {
+      text-align: center;
+    }
+
+    .component.align-table-right &__table,
+    &__table .align-right {
+      text-align: right;
+    }
+  }
+  // --------------------------------------------------
 }
 
-
-
-
-// create a loop mixin
+// --------------------------------------------------
+// Loop mixin
+// --------------------------------------------------
 .grid-loop(@columns, @total: @columns) when (@columns > 0) {
   // loop output
-  @media (min-width: @device-width-medium) {
-    .csvtojson__table[data-col-count="@{columns}"] th,
-    .csvtojson__table[data-col-count="@{columns}"] td {
-    // width: percentage(@columns / @total)
+  .csvtotable__table[data-col-count="@{columns}"].retain-desktop-view .csvtotable__head-cell,
+  .csvtotable__table[data-col-count="@{columns}"].retain-desktop-view .csvtotable__body-cell {
+      width: 100% / @columns;
+  }
+
+  .csvtotable__table[data-col-count="@{columns}"].is-stacked .csvtotable__head-cell,
+  .csvtotable__table[data-col-count="@{columns}"].is-stacked .csvtotable__body-cell {
+    @media (min-width: @device-width-medium) {
       width: 100% / @columns;
     }
   }
@@ -36,64 +132,69 @@
 
 // apply the mixin, for 10 columns
 .grid-loop(10);
-
-
-
-// styles
-// [class^='grid-'] {
-//   border: 1px solid;
-//   box-sizing: border-box;
-//   float: left;
-//   padding: 1em 0;
-//   text-align: center;
-// }
+// --------------------------------------------------
 
 // --------------------------------------------------
 // --------------------------------------------------
 // THEME
 // --------------------------------------------------
 // --------------------------------------------------
-.csvtojson {
+.csvtotable {
   &__table {
     position: relative;
-  }
 
-
-  &__body-row:nth-child(4n-6) {
-    background-color: darken(@white, 5%);
-  }
-
-  &__body-row:nth-child(4n-4) {
-    background-color: darken(@white, 10%);
-  }
-
-
-
-  &__head-cell,
-  &__body-cell {
     @media (max-width: @device-width-medium) {
-      display: block;
+      text-align: left;
     }
   }
 
+  // --------------------------------------------------
+  // tbody zebra strips
+  // --------------------------------------------------
+  &__body-row:nth-child(4n-6) &__body-cell {
+    background-color: darken(@white, 5%);
+  }
 
+  &__body-row:nth-child(4n-4) &__body-cell {
+    background-color: darken(@white, 10%);
+  }
+  // --------------------------------------------------
 
+  // Cell padding
+  &__head-cell,
+  &__body-cell {
+    padding: @item-padding / 2;
+  }
 
+  // thead and tbody header row cell theme
   &__head-cell.is-th,
   &__body-cell.is-th {
     background-color: @item-color-hover;
     color: @item-color-inverted-hover;
   }
 
+  // tbody body row header cell theme
   &__body-row.is-body &__body-cell.is-th {
     background-color: @item-color;
     color: @item-color-inverted;
   }
 
-  &__head-cell.is-th,
-  &__body-cell.is-th,
-  &__body-cell.is-td {
-    padding: @item-padding / 2;
-    text-align: left;
+  //
+
+  // --------------------------------------------------
+  // Stacked table two column styles
+  // --------------------------------------------------
+  // Two column table cells theme below medium breakpoint
+  &__table.is-two-columns &__body-cell {
+    @media (max-width: @device-width-medium) {
+      box-shadow: inset 12rem 0 0 0 @item-color;
+    }
+  }
+
+  // Two column header span text theme below medium breakpoint
+  &__table.is-two-columns &__body-cell-span {
+    @media (max-width: @device-width-medium) {
+      color: @item-color-inverted;
+    }
   }
 }

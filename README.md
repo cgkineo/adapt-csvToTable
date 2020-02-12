@@ -1,9 +1,12 @@
 # adapt-csvToTable
 
 ### Flags
-* `_isMobileTwoColumns=true` Add columns headers to row cells
-* `_isMobileTwoColumns=false` Add columns headers as a separate row in between data rows
-* `_hasRowHeaders=true` Format first column cells as row headers
+* `_retainDesktopViewOnMobile=true` = Keep table the same on desktop and mobile
+* `_retainDesktopViewOnMobile=false` = Change table to either one or two column layout
+* `_mobileColumns=1` = Set mobile column count to 1. Only acceptable values are `1` and `2`
+* `_mobileColumns=2` = Set mobile column count to 2. Only acceptable values are `1` and `2`
+* `_hasRowHeaders=true` = Format first column cells as row headers
+* `caption` = Add a table caption as a aria label. Useful for accessibility
 
 #### CSV Format
 * \n or \r\n = new row
