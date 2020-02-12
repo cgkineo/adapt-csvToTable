@@ -167,16 +167,18 @@
   }
 
   // thead and tbody header row cell theme
-  &__head-cell.is-th,
-  &__body-cell.is-th {
+  &__head-row &__head-cell.is-th,
+  &__body-row.is-header &__body-cell.is-th {
     background-color: @item-color-hover;
     color: @item-color-inverted-hover;
   }
 
   // tbody body row header cell theme
   &__body-row.is-body &__body-cell.is-th {
-    background-color: @item-color;
-    color: @item-color-inverted;
+    @media (min-width: @device-width-medium) {
+      background-color: @item-color;
+      color: @item-color-inverted;
+    }
   }
 
   //
