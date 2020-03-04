@@ -10,10 +10,10 @@
     <tr class="csvtotable__head-row">
       {{#each columns as |cell colIndex|}}
       <th class="csvtotable__head-cell is-th {{lookup2d @root/styles 0 colIndex}}" scope="col" colspan="{{lookup2d @root/colspans 0 colIndex}}" rowspan="{{lookup2d @root/rowspans 0 colIndex}}">
-        {{cell}}
+        {{{cell}}}
       </th>
       {{/each}}
-    </tr c>
+    </tr>
   </thead>
 
   <tbody>
@@ -23,7 +23,7 @@
     <tr class="csvtotable__body-row is-header">
       {{#each @root/columns as |cell colIndex|}}
       <th class="csvtotable__body-cell is-th {{lookup2d @root/styles rowIndex colIndex}}" scope="col" colspan="{{lookup2d @root/colspans rowIndex colIndex}}" rowspan="{{lookup2d @root/rowspans rowIndex colIndex}}">
-        {{cell}}
+        {{{cell}}}
       </th>
       {{/each}}
     </tr>
@@ -37,22 +37,22 @@
           {{#unless @root/_retainDesktopViewOnMobile}}
           {{#if (lookup @root/columns colIndex)}}
           <span class="csvtotable__body-cell-span">
-            {{lookup @root/columns colIndex}}
+            {{{lookup @root/columns colIndex}}}
           </span>
           {{/if}}
           {{/unless}}
-          {{cell}}
+          {{{cell}}}
         </th>
         {{else}}
         <td class="csvtotable__body-cell is-td {{lookup2d @root/styles rowIndex colIndex}}" colspan="{{lookup2d @root/colspans rowIndex colIndex}}" rowspan="{{lookup2d @root/rowspans rowIndex colIndex}}">
           {{#unless @root/_retainDesktopViewOnMobile}}
           {{#if (lookup @root/columns colIndex)}}
           <span class="csvtotable__body-cell-span">
-            {{lookup @root/columns colIndex}}
+            {{{lookup @root/columns colIndex}}}
           </span>
           {{/if}}
           {{/unless}}
-          {{cell}}
+          {{{cell}}}
         </td>
         {{/if}}
         {{else}}
@@ -60,11 +60,11 @@
           {{#unless @root/_retainDesktopViewOnMobile}}
           {{#if (lookup @root/columns colIndex)}}
           <span class="csvtotable__body-cell-span">
-            {{lookup @root/columns colIndex}}
+            {{{lookup @root/columns colIndex}}}
           </span>
           {{/if}}
           {{/unless}}
-          {{cell}}
+          {{{cell}}}
         </td>
       {{/if}}
       {{/each}}
