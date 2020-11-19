@@ -1,0 +1,57 @@
+    // Some table examples to get started with    
+    // Please refer to the readme for guidence on syntax https://github.com/cgkineo/adapt-csvToTable/blob/master/README.md
+    
+    // Simple table 1
+    // Desktop view is maintained on mobile
+    {
+        "_id": "c-05",
+        "_parentId": "b-05",
+        "_type": "component",
+        "_component": "text",
+        "_classes": "",
+        "_layout": "left",
+        "title": "Simple table 1",
+        "displayTitle": "Simple table 1",
+        "body": "{{#csvToTable _retainDesktopViewOnMobile=true _mobileColumns='' _hasRowHeaders=false caption=''}}Title\nrow 1 item 1,row 1 item 2\nrow 2 item 1,\"row 2, item 2, with commas\"\nrow 3 item 1,row 3 item 2\nrow 4 item 1,row 4 item 2\nrow 5 item 1,row 5 item 2\nrow 6 item 1,\"row 6, item 2, with commas\"{{else}}[2:1]\n\n\n\n\n\n{{/csvToTable}}",
+        "instruction": "",
+        "_pageLevelProgress": {
+        "_isEnabled": true
+        }
+    }
+
+    // Simple table 2
+    // Desktop view is maintained on mobile
+    {
+        "_id": "c-05",
+        "_parentId": "b-05",
+        "_type": "component",
+        "_component": "text",
+        "_classes": "",
+        "_layout": "right",
+        "title": "Simple table 2",
+        "displayTitle": "Simple table 2",
+        "body": "{{#csvToTable _retainDesktopViewOnMobile=true _mobileColumns='' _hasRowHeaders=false caption=''}}Title 1,Title 2\nrow 1 item 1,row 1 item 2\nrow 2 item 1,row 2 item 2{{/csvToTable}}",
+        "instruction": "",
+        "_pageLevelProgress": {
+            "_isEnabled": true
+        }
+    }
+
+    // Table that requires alternative layout for mobile
+    {
+        "_id": "c-05",
+        "_parentId": "b-05",
+        "_type": "component",
+        "_component": "text",
+        "_classes": "",
+        "_layout": "full",
+        "title": "Table that requires alternative layout for mobile",
+        "displayTitle": "Table that requires alternative layout for mobile",
+        "body": "{{#csvToTable _retainDesktopViewOnMobile=false _mobileColumns=2 _hasRowHeaders=true caption=''}},Column 1 title,Column 2 title,Column 3 title\nRow 1 title,row 1 item 1,row 1 item 2,row 1 item 3\nRow 2 title,row 2 item 1,row 2 item 2,row 2 item 3{{/csvToTable}}",
+        "instruction": "",
+        "_pageLevelProgress": {
+            "_isEnabled": true
+        }
+    }
+
+    Accessibility note: A 'caption' functions like a heading for a table. Captions help users to find a table and understand what it’s about and decide if they want to read it. (https: //www.w3.org/WAI/tutorials/tables/caption-summary/)
