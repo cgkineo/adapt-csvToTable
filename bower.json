@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "framework": ">=5",
   "homepage": "https://github.com/cgkineo/adapt-csvToTable",
-  "issues": "https://github.com/cgkineo/adapt_framework/issues/new",
+  "issues": "https://github.com/cgkineo/adapt-csvToTable/issues",
   "extension": "csvToTable",
   "displayName": "CSVToTable",
   "description": "An extension which provides a basic csv to html table handlebars helper",
